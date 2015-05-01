@@ -77,6 +77,7 @@ usage:
 			for(int i = 2; i < argc; i++) {
 				enum logger_item id = log_item_id(argv[i]);
 				if(id == LOGGER_NUM_ITEMS) {
+					printf("error: unknown log id %s\n", argv[i]);
 					continue;
 				}
 
@@ -89,6 +90,7 @@ usage:
 		for(int i = 2; i < argc; i++) {
 			enum logger_item id = log_item_id(argv[i]);
 			if(id == LOGGER_NUM_ITEMS) {
+				printf("error: unknown log id %s\n", argv[i]);
 				continue;
 			}
 			log_enable(id);
@@ -99,6 +101,7 @@ usage:
 		for(int i = 2; i < argc; i++) {
 			enum logger_item id = log_item_id(argv[i]);
 			if(id == LOGGER_NUM_ITEMS) {
+				printf("error: unknown log id %s\n", argv[i]);
 				continue;
 			}
 			log_disable(id);
