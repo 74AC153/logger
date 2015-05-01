@@ -19,6 +19,9 @@ int logger_output_ctl(int flags);
 void log_msg(unsigned item, const char *fmt, ...);
 void log_msg_va(unsigned item, const char *fmt, va_list ap);
 
+// items is terminated by any value > logger_max_items()
+// (requires c99 compound literal support)
+#define ITEMS(...) ((unsigned[]){ __VA_ARGS__, ~0U })
 void log_msg_anyof(unsigned *items, const char *fmt, ...);
 void log_msg_anyof_va(unsigned *items, const char *fmt, va_list ap);
 
