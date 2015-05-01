@@ -22,10 +22,13 @@ int main(void)
 	int i = 0;
 	while(++i < 101) {
 		if(i % 2 == 0) 
-			log_msg(LOGGER_FIZZ, "fizz %d\n", i);
+			log_msg(LOGGER_FIZZ, "fizz", i);
 
 		if(i % 3 == 0)
-			log_msg(LOGGER_BUZZ, "buzz %d\n", i);
+			log_msg(LOGGER_BUZZ, "buzz", i);
+
+		if(i % 2 == 0 || i % 3 == 0)
+			log_msg_anyof((unsigned[]){LOGGER_FIZZ, LOGGER_BUZZ, ~0U}, "\n");
 
 		sleep(1);
 	}

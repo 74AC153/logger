@@ -134,22 +134,41 @@ int logger_output_ctl(int flags)
 	return 0;
 }
 
+static void __log_msg_va(const char *fmt, va_list ap)
+{
+	if(log_to_stdout)
+		vfprintf(stdout, fmt, ap);
+
+	if(log_to_stderr)
+		vfprintf(stderr, fmt, ap);
+}
+
 void log_msg(unsigned item, const char *fmt, ...)
 {
 	if(!log_enabled(item))
 		return;
 
-	if(log_to_stdout) {
-		va_list ap;
-		va_start(ap, fmt);
-		vfprintf(stdout, fmt, ap);
-		va_end(ap);
-	}
+	va_list ap;
+	va_start(ap, fmt);
+	__log_msg_va(fmt, ap);
+	va_end(ap);
+}
 
-	if(log_to_stderr) {
-		va_list ap;
-		va_start(ap, fmt);
-		vfprintf(stderr, fmt, ap);
-		va_end(ap);
+void log_msg_anyof_va(unsigned *items, const char *fmt, va_list ap)
+{
+	for(size_t i = 0; items[i] < logger_max_items(); i++) {
+		if(log_enabled(items[i])) {
+			__log_msg_va(fmt, ap);
+			break;
+		}
 	}
 }
+
+void log_msg_anyof(unsigned *items, const char *fmt, ...)
+{
+	va_list ap;
+	va_start(ap, fmt);
+	log_msg_anyof_va(items, fmt, ap);
+	va_end(ap);
+}
+
