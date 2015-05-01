@@ -2,7 +2,7 @@
 
 ## Overview
 
-This software has three parts:
+This software has four parts:
 
 -  logging subsystem functionality: logger.{c,h}
 -  remote control: logger_ctl.c
