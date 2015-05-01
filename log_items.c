@@ -14,6 +14,8 @@ enum logger_item log_item_id(const char *name)
 {
 	int i;
 	for(i = 0; i < (int)ARRLEN(item_names); i++) {
+		if(! item_names[i])
+			break;
 		if(strcmp(item_names[i], name) == 0)
 			break;
 	}
