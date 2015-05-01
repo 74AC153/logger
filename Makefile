@@ -1,4 +1,4 @@
-CFLAGS= --std=c99 -Wall -Wextra -g3 -D_POSIX_C_SOURCE=200112L
+CFLAGS= --std=c99 -Wall -Wextra -g3 -D_POSIX_C_SOURCE=200112L -D_GNU_SOURCE
 
 default: all
 all: logger_ctl logger_test

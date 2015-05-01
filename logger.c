@@ -27,6 +27,20 @@ int logger_init(const char *ctl_path)
 {
 	mempage_len = sysconf(_SC_PAGESIZE);
 
+	if(ctl_path == NULL) {
+		mempage_addr =
+			mmap(NULL, mempage_len,
+			     PROT_READ | PROT_WRITE,
+			     MAP_PRIVATE | MAP_ANONYMOUS,
+			     -1, 0);
+		if(mempage_addr == MAP_FAILED) {
+			perror("mmap(mempage_fd)");
+			fprintf(stderr, "fd=%d len=%zu\n", mempage_fd, mempage_len);
+			goto error;
+		}
+		return 0;
+	}
+
 	mempage_fd = open(ctl_path, O_RDWR | O_CREAT, 0644);
 	if(mempage_fd < 0) {
 		perror("open(ctl_path)");
