@@ -17,7 +17,7 @@ To use:
 
 ## logger_ctl
 
-Run logger_ctl with no arguments to see an overview of its commandline
+Run logger_ctl with no arguments to see an overview of its command-line
 arguments.
 
 Example: Assuming that all error log items contain the string 'error':
