@@ -25,6 +25,18 @@ unsigned logger_max_items(void)
 
 int logger_init(const char *ctl_path)
 {
+	// clean up if this is being re-called
+	if(mempage_addr != MAP_FAILED) {
+		munmap(mempage_addr, mempage_len);
+		mempage_addr = MAP_FAILED;
+		mempage_len = 0;
+	}
+	if(mempage_fd >= 0) {
+		close(mempage_fd);
+		mempage_fd = -1;
+	}
+
+
 	mempage_len = sysconf(_SC_PAGESIZE);
 
 	if(ctl_path == NULL) {
