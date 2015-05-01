@@ -46,8 +46,8 @@ int logger_init(const char *ctl_path)
 			     MAP_PRIVATE | MAP_ANONYMOUS,
 			     -1, 0);
 		if(mempage_addr == MAP_FAILED) {
-			perror("mmap(mempage_fd)");
-			fprintf(stderr, "fd=%d len=%zu\n", mempage_fd, mempage_len);
+			perror("mmap(anon)");
+			fprintf(stderr, "len=%zu\n", mempage_len);
 			goto error;
 		}
 		return 0;
